@@ -10,6 +10,7 @@ import Navbar from './Navbar'
 //import Navigation from './Navigation'
 import WhatWeDo from './WhatWeDo'
 import '../App.css'
+import Logout from './Logout'
 
 
 
@@ -23,6 +24,7 @@ const App = () => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/explore" component={Explore} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/logout" component={Logout} />
                 <Route exact path="/signup" component={SignUp} />
                 <Route exact path="/what-we-do" component={WhatWeDo} />
 

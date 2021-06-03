@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 //import { Route } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import tumpa from '../images/tumpa.jpeg';
@@ -7,6 +7,8 @@ import tumpa from '../images/tumpa.jpeg';
 
 const WhatWeDo = () => {
     const history = useHistory();
+    const [userData, setuserData] = useState({});
+    let data;
 
     const callWhatWeDoPage = async () => {
         try {
@@ -14,13 +16,20 @@ const WhatWeDo = () => {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
-                    "Content-Type": "cpplication/json"
+                    "Content-Type": "application/json"
                 },
                 credentials: "include"
 
             });
-            const data = await res.json();
+            //console.log(res);
+
+            data = await res.json();
             console.log(data);
+            setuserData(data);
+            console.log(userData.name);
+            console.log(userData.email);
+            //console.log("what we do ");
+            //console.log(data);
             if (res.status === 401) {
                 const error = new Error(res.error);
                 throw error;
@@ -40,25 +49,23 @@ const WhatWeDo = () => {
 
     return (
         <>
-            <div className="container">
-                <form method="POST">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <img src={tumpa} alt="tumpa" />
 
-                        </div>
 
-                        <div className="col-md-4">
-                            <div>
-                                <h5>Tumpa</h5>
-                            </div>
+            <form method="GET">
+                <div className="row ">
+                    <div className="col-4">
 
-                        </div>
 
                     </div>
+                    <div className="col-6">
+                        <h5>{userData.email}</h5>
+                    </div>
 
-                </form>
-            </div>
+                </div>
+            </form>
+
+
+
         </>
     );
 };

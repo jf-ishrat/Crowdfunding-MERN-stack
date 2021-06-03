@@ -3,6 +3,7 @@ const User = require('../model/userSchema');
 
 const authenticate = async (req, res, next) => {
     try {
+        //console.log("middleware");
         const token = req.cookies.webcookie;
         const veriyToken = jwt.verify(token, process.env.SECRET_KEY);
         const rootUser = await User.findOne({ _id: veriyToken._id, "tokens.token": token });
@@ -11,7 +12,8 @@ const authenticate = async (req, res, next) => {
         }
         req.token = token;
         req.rootUser = rootUser;
-        req.userId = rootUser._id;
+        req.userID = rootUser._id;
+
         next();
     } catch (err) {
         res.status(401).send('Unauthorized: No token found');

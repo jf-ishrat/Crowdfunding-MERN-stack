@@ -6,7 +6,7 @@ const User = require("../model/userSchema")
 const authenticate = require("../middleware/authenticate");
 const cookieparser = require('cookie-parser');
 
-router.use(cookieparser);
+
 
 router.get('/', (req, res) => {
     res.send('Hello World from router')
@@ -113,10 +113,19 @@ router.post('/signin', async (req, res) => {
     }
 });
 
+router.use(cookieparser());
+
 router.get('/what-we-do', authenticate, (req, res) => {
-    console.log("hello my about ");
+    //console.log("hello my about ");
     res.send(req.rootUser);
-    //     res.send('Hello World')
+    //     res.send('Hello World') router.use(cookieparser);
+});
+
+router.get('/logout', (req, res) => {
+
+    res.clearCookie('webcookie', { path: '/' });
+    res.status(200).send('user logout');
+
 });
 
 module.exports = router;

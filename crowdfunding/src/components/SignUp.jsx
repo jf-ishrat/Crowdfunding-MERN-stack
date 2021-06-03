@@ -70,66 +70,66 @@ const SignUp = () => {
     return (
         <>
             <div >
-                <div class="signup-form">
+                <div className="signup-form">
 
                     <h2>Sign Up</h2>
                     <p>Please fill in this form to create an account!</p>
                     <hr />
                     <form method="post" >
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <span class="fa fa-user"></span>
+                        <div className="form-group">
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text">
+                                        <span className="fa fa-user"></span>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" name="name" value={user.name} onChange={handleInputs} placeholder="Username" required="required" />
+                                <input type="text" className="form-control" name="name" value={user.name} onChange={handleInputs} placeholder="Username" required="required" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-paper-plane"></i>
+                        <div className="form-group">
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text">
+                                        <i className="fa fa-paper-plane"></i>
                                     </span>
                                 </div>
-                                <input type="email" class="form-control" name="email" value={user.email} onChange={handleInputs} placeholder="Email Address" required="required" />
+                                <input type="email" className="form-control" name="email" value={user.email} onChange={handleInputs} placeholder="Email Address" required="required" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-phone"></i>
+                        <div className="form-group">
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text">
+                                        <i className="fa fa-phone"></i>
                                     </span>
                                 </div>
-                                <input type="number" class="form-control" name="phone" value={user.phone} onChange={handleInputs} placeholder="Phone Number" required="required" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-lock"></i>
-                                    </span>
-                                </div>
-                                <input type="text" class="form-control" name="password" value={user.password} onChange={handleInputs} placeholder="Password" required="required" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-lock"></i>
-                                        <i class="fa fa-check"></i>
-                                    </span>
-                                </div>
-                                <input type="text" class="form-control" name="cpassword" value={user.cpassword} onChange={handleInputs} placeholder="Confirm Password" required="required" />
+                                <input type="number" className="form-control" name="phone" value={user.phone} onChange={handleInputs} placeholder="Phone Number" required="required" />
                             </div>
                         </div>
 
-                        <div class="form-group form-button">
+                        <div className="form-group">
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text">
+                                        <i className="fa fa-lock"></i>
+                                    </span>
+                                </div>
+                                <input type="text" className="form-control" name="password" value={user.password} onChange={handleInputs} placeholder="Password" required="required" />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text">
+                                        <i className="fa fa-lock"></i>
+                                        <i className="fa fa-check"></i>
+                                    </span>
+                                </div>
+                                <input type="text" className="form-control" name="cpassword" value={user.cpassword} onChange={handleInputs} placeholder="Confirm Password" required="required" />
+                            </div>
+                        </div>
+
+                        <div className="form-group form-button">
                             <input type="submit" name="signup" className="form-submit btn btn-primary btn-lg" value="register"
                                 onClick={PostData}
                             />
@@ -138,7 +138,7 @@ const SignUp = () => {
                         </div>
 
 
-                        <div class="text-center">Already have an account? <NavLink to="/login">Login here</NavLink></div>
+                        <div className="text-center">Already have an account? <NavLink to="/login">Login here</NavLink></div>
 
                     </form>
 
