@@ -1,7 +1,37 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { NavLink } from 'react-router-dom';
+import { UserContext } from './App';
 
 const Navbar = () => {
+    const { state, dispatch } = useContext(UserContext);
+
+    const RenderMenu=()=>{
+        if (state){
+            return(
+                <>
+                    <li className="nav-item "><NavLink aria-current="page" to="/" className="nav-link active"></NavLink></li>
+                    <li className="nav-item"><NavLink to="/what-we-do" className="nav-link">What We Do</NavLink></li>
+                    <li className="nav-item"><NavLink to="/start-a-campaign" className="nav-link">Start a Campaign</NavLink></li>
+                    <li className="nav-item"><NavLink to="/logout" className="nav-link">Logout</NavLink></li>
+
+                </>
+            )
+        }
+        else{
+            return(
+                <>
+                    <li className="nav-item "><NavLink aria-current="page" to="/" className="nav-link active"></NavLink></li>
+                    <li className="nav-item"><NavLink to="/what-we-do" className="nav-link">What We Do</NavLink></li>
+                    <li className="nav-item"><NavLink to="/start-a-campaign" className="nav-link">Start a Campaign</NavLink></li>
+
+
+                    <li className="nav-item"><NavLink to="/login" className="nav-link">Login</NavLink></li>
+                    <li className="nav-item"><NavLink to="/signup" className="nav-link">Sign Up</NavLink></li>
+                
+                </>
+            )
+        }
+    }
     return (
         <>
             <div clasName="container-fluid nav_bg">
@@ -38,17 +68,12 @@ const Navbar = () => {
                                             </ul>
                                         </li>
 
+                                        <RenderMenu/>
 
 
 
-                                        <li className="nav-item "><NavLink aria-current="page" to="/" className="nav-link active"></NavLink></li>
-                                        <li className="nav-item"><NavLink to="/what-we-do" className="nav-link">What We Do</NavLink></li>
-                                        <li className="nav-item"><NavLink to="/start-a-campaign" className="nav-link">Start a Campaign</NavLink></li>
 
-
-                                        <li className="nav-item"><NavLink to="/login" className="nav-link">Login</NavLink></li>
-                                        <li className="nav-item"><NavLink to="/signup" className="nav-link">Sign Up</NavLink></li>
-                                        <li className="nav-item"><NavLink to="/logout" className="nav-link">Logout</NavLink></li>
+                                        
 
 
                                     </ul>

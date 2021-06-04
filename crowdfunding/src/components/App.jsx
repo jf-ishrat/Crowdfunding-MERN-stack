@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useReducer } from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../../node_modules/bootstrap/dist/js/bootstrap.bundle'
 import Home from './Home'
@@ -11,26 +11,44 @@ import Navbar from './Navbar'
 import WhatWeDo from './WhatWeDo'
 import '../App.css'
 import Logout from './Logout'
+import { initialState, reducer } from '../reducer/UseReducer'
 
 
 
 import { Redirect, Route, Switch } from 'react-router';
 
+export const UserContext = createContext();
+
+
+const Routing = () => {
+    return (
+        <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/explore" component={Explore} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/what-we-do" component={WhatWeDo} />
+
+            <Route exact path="/start-a-campaign" component={StartACampaign} />
+            <Redirect to="/" />
+        </Switch>
+
+    )
+}
+
 const App = () => {
+    const [state, dispatch] = useReducer(reducer, initialState);
+
     return (
         <>
-            <Navbar />
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/explore" component={Explore} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/logout" component={Logout} />
-                <Route exact path="/signup" component={SignUp} />
-                <Route exact path="/what-we-do" component={WhatWeDo} />
+            <UserContext.Provider value={{ state, dispatch }}>
 
-                <Route exact path="/start-a-campaign" component={StartACampaign} />
-                <Redirect to="/" />
-            </Switch>
+                <Navbar />
+                <Routing />
+
+            </UserContext.Provider>
+
         </>
 
     );

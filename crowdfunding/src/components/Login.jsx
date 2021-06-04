@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 //import GoogleLogin from 'react-google-login';
+import { UserContext } from './App';
 
 const Login = () => {
+    const { state, dispatch } = useContext(UserContext);
     const history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -34,6 +36,7 @@ const Login = () => {
             window.alert("Invalid credential");
             console.log("Invalid credential");
         } else {
+            dispatch({ type: "USER", payload: true });
             window.alert("login successful");
             console.log("login successful");
             history.push("/");
