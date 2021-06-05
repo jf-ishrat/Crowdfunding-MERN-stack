@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 //import { Route } from 'react-router';
 import { NavLink, useHistory } from 'react-router-dom';
 
+
 const SignUp = () => {
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
@@ -33,34 +34,47 @@ const SignUp = () => {
         value = e.target.value;
 
         setUser({ ...user, [name]: value });
+
     }
 
     const PostData = async (e) => {
         e.preventDefault();
-        const { name, email, phone, password, cpassword } = user;
-        const res = await fetch("/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name, email, phone, password, cpassword
+        try {
 
-            })
+            const { name, email, phone, password, cpassword } = user;
+            const res = await fetch("/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name, email, phone, password, cpassword
+
+                })
 
 
-        });
-        const data = await res.json();
-        if (data.status === 401 || !data) {
-            window.alert("Registeration successful");
-            console.log("Registeration successful");
-            history.push("/login");
+            });
+            const data = await res.json();
 
-        } else {
-            window.alert("Invalid Registeration");
-            console.log("Invalid Registeration");
+            if (res.status === 422 || !data) {
+                window.alert(data.error);
+                console.log("Invalid Registeration");
 
+
+
+            } else {
+
+                window.alert("Registeration successful");
+                console.log("Registeration successful");
+                history.push("/login");
+
+
+            }
+
+        } catch (err) {
+            console.log(err);
         }
+
 
     }
 

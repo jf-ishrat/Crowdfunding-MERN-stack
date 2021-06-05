@@ -18,30 +18,37 @@ const Login = () => {
         // console.log(allEntry);
         // setEmail("");
         // setPassword("");
+        try {
 
-        const res = await fetch("/signin", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email, password
+            const res = await fetch("/signin", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email, password
 
-            })
+                })
 
 
-        });
-        const data = await res.json();
-        if (data.status === 400 || !data) {
-            window.alert("Invalid credential");
-            console.log("Invalid credential");
-        } else {
-            dispatch({ type: "USER", payload: true });
-            window.alert("login successful");
-            console.log("login successful");
-            history.push("/");
+            });
+            const data = await res.json();
+            if (res.status === 400 || !data) {
+                window.alert("Invalid credential");
+                console.log("Invalid credential");
+            } else {
+                dispatch({ type: "USER", payload: true });
+                window.alert("login successful");
+                console.log("login successful");
+                history.push("/");
 
+            }
+
+        } catch (err) {
+            console.log(err);
         }
+
+
 
 
 
@@ -78,8 +85,8 @@ const Login = () => {
                         <button type="submit" onClick={SubmitForm} className="btn btn-primary login-btn btn-block">Log in</button>
                     </div>
                     <div className="clearfix">
-                        <label className="float-left form-check-label"><input type="checkbox" /> Remember me</label>
-                        <NavLink to="#" className="float-right">Forgot Password?</NavLink>
+
+                        <NavLink to="/reset-pass" className="float-right">Forgot Password?</NavLink>
                     </div>
                     <div className="or-seperator"><i>or</i></div>
                     <p className="text-center">Login with your social media account</p>

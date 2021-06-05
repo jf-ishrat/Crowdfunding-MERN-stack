@@ -1,10 +1,23 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+
 const router = express.Router();
 require('../db/connection')
 const User = require("../model/userSchema")
 const authenticate = require("../middleware/authenticate");
 const cookieparser = require('cookie-parser');
+const validator = require('validator');
+const nodemailer = require('nodemailer')
+const sendgridTransport = require('nodemailer-sendgrid-transport')
+
+
+
+const transporter = nodemailer.createTransport(sendgridTransport({
+    auth: {
+        api_key: "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"
+    }
+}))
+
 
 
 
@@ -21,17 +34,17 @@ router.get('/', (req, res) => {
 
 //     const { name, email, phone, password, cpassword } = req.body;
 //     if (!name || !email || !phone || !password || !cpassword) {
-//         return res.status(422).json({ error: "plz fill the form correctly" });
+//         return res.status(422).send({ error: "plz fill the form correctly" });
 //     }
 //     User.findOne({ email: email }).then((userExist) => {
 //         if (userExist) {
-//             return res.status(422).json({ error: "Email already exist" });
+//             return res.status(422).send({ error: "Email already exist" });
 //         }
 //         const user = new User({ name, email, phone, password, cpassword });
 //         user.save().then(() => {
 
-//             res.status(201).json({ message: "Resisterd successfuly" })
-//         }).catch((err) => { res.status(500).json({ error: "failed to registered" }) });
+//             res.status(201).send({ message: "Resisterd successfuly" })
+//         }).catch((err) => { res.status(500).send({ error: "failed to registered" }) });
 
 //     }).catch((err) => { console.log(err) });
 //     //res.send('Hello World from router')
@@ -39,17 +52,30 @@ router.get('/', (req, res) => {
 
 
 router.post('/register', async (req, res) => {
+    var regix = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=-\?;,./{}|\":<>\[\]\\\' ~_]).{8,20}/;
+
 
     const { name, email, phone, password, cpassword } = req.body;
     if (!name || !email || !phone || !password || !cpassword) {
-        return res.status(422).json({ error: "plz fill the form correctly" });
+        return res.status(422).send({ error: "plz fill the form correctly" });
     }
 
     try {
+        if (!regix.test(password)) {
+            return res.status(422).send({
+                error: "Password :At least one uppercase , one lowercase , one digit ,one special character and length 8 to 20 "
+            });
+
+        }
+
+
+        if (!validator.isEmail(email)) {
+            return res.status(422).send({ error: "Invalid Email" });
+        }
 
         const userExist = await User.findOne({ email: email });
         if (userExist) {
-            return res.status(422).json({ error: "Email already exist" });
+            return res.status(422).send({ error: "Email already exist" });
         }
 
         const user = new User({ name, email, phone, password, cpassword });
@@ -57,13 +83,20 @@ router.post('/register', async (req, res) => {
         await user.save();
         // if (userRegister) {
 
-        //     res.status(201).json({ message: "Resisterd successfuly" })
+        //     res.status(201).send({ message: "Resisterd successfuly" })
         // }
         // else {
-        //     res.status(500).json({ error: " failed to register" });
+        //     res.status(500).send({ error: " failed to register" });
         // }
 
-        res.status(201).json({ message: "Resisterd successfuly" });
+        transporter.sendMail({
+            to: email,
+            from: "halumcheck@gmail.com",
+            subject: "signup success",
+            html: "<h1>welcome to crowdfunding</h1>"
+        })
+
+        return res.status(201).send({ message: "Resisterd successfuly" });
 
 
 
@@ -80,7 +113,7 @@ router.post('/signin', async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(400).json({ error: "please fill the data" });
+            return res.status(400).send({ error: "please fill the data" });
 
         }
         const userLogin = await User.findOne({ email: email });
@@ -94,16 +127,16 @@ router.post('/signin', async (req, res) => {
                 httpOnly: true
             });
             if (isMatch) {
-                res.json({ message: "user signin succesfully" });
+                return res.send({ message: "user signin succesfully" });
 
             }
             else {
-                res.status(400).json({ error: "user error pass" });
+                return res.status(400).send({ error: "user error pass" });
 
             }
 
         } else {
-            res.status(400).json({ error: "user error" });
+            return res.status(400).send({ error: "user error" });
 
         }
 
@@ -125,6 +158,84 @@ router.get('/logout', (req, res) => {
 
     res.clearCookie('webcookie', { path: '/' });
     res.status(200).send('user logout');
+
+});
+
+router.post('/reset-pass', async (req, res) => {
+    const { email } = req.body;
+
+
+    try {
+        if (!email) {
+            return res.status(422).send({ error: "plz fill the form correctly" });
+        }
+        const userExist = await User.findOne({ email: email });
+        if (!userExist) {
+            return res.status(422).send({ error: "Email doesn't exist" });
+        }
+        const token = await userExist.generateresetToken();
+        transporter.sendMail({
+            to: email,
+            from: "halumcheck@gmail.com",
+            subject: "password reset",
+            html: `
+                     <p>You requested for password reset</p>
+                     <h5>click in this <a href="http://localhost:3000/new-password/${token}">link</a> to reset password</h5>
+                     `
+        });
+        res.json({ message: "check your email" });
+
+
+    } catch (err) {
+        console.log(err);
+    }
+
+});
+
+
+router.post('/new-password', async (req, res) => {
+    var regix = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=-\?;,./{}|\":<>\[\]\\\' ~_]).{8,20}/;
+
+
+    const { password, cpassword, token } = req.body;
+    if (!password || !cpassword) {
+        return res.status(422).send({ error: "plz fill the form correctly" });
+    }
+
+    try {
+        if (!regix.test(password)) {
+            return res.status(422).send({
+                error: "Password :At least one uppercase , one lowercase , one digit ,one special character and length 8 to 20 "
+            });
+
+        }
+
+
+
+
+        const userExist = await User.findOne({ resetToken: token, expireToken: { $gt: Date.now() } });
+        if (!userExist) {
+            return res.status(422).send({ error: "resetlink expired" });
+        }
+
+        userExist.password = password;
+        userExist.cpassword = cpassword;
+        userExist.resetToken = undefined;
+        userExist.expireToken = undefined;
+
+        const usersave = await userExist.save();
+
+
+
+        return res.status(201).send({ message: "Reset password successful" });
+
+
+
+    } catch (err) {
+        console.log(err);
+
+    }
+
 
 });
 

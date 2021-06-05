@@ -6,7 +6,9 @@ import Login from './Login'
 import SignUp from './SignUp'
 import Explore from './Explore'
 import StartACampaign from './StartACampaign'
+import NewPassword from './NewPassword'
 import Navbar from './Navbar'
+import ResetPass from './ResetPass'
 //import Navigation from './Navigation'
 import WhatWeDo from './WhatWeDo'
 import '../App.css'
@@ -29,6 +31,8 @@ const Routing = () => {
             <Route exact path="/logout" component={Logout} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/what-we-do" component={WhatWeDo} />
+            <Route exact path="/reset-pass" component={ResetPass} />
+            <Route exact path="/new-password/:token" component={NewPassword} />
 
             <Route exact path="/start-a-campaign" component={StartACampaign} />
             <Redirect to="/" />
