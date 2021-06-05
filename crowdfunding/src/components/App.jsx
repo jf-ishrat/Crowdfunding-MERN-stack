@@ -8,6 +8,7 @@ import Explore from './Explore'
 import StartACampaign from './StartACampaign'
 import NewPassword from './NewPassword'
 import Navbar from './Navbar'
+import Footer from './Footer'
 import ResetPass from './ResetPass'
 //import Navigation from './Navigation'
 import WhatWeDo from './WhatWeDo'
@@ -50,6 +51,7 @@ const App = () => {
 
                 <Navbar />
                 <Routing />
+                <Footer />
 
             </UserContext.Provider>
 
