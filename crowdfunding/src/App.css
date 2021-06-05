@@ -1,12 +1,63 @@
 /* register css */
+:root {
+
+	--bg-black-50 : #ffff;
+	--link-hover-color:  #ff00ff;
+	--bg-black-100 : #242424;
+	--text-white : #fff;
+}
 .bg-light {
     background-color: #ffff !important;
 }
 body {
-	color: rgb(17, 4, 4);
-	background: #fff;
-	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+    line-height: 1.5;
+    overflow-x: hidden;
+
+	background-color:var(--bg-black-50);
+
 }
+
+*:not(i){
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+:before,:after{
+    box-sizing: border-box;
+}
+
+#nav {
+    float: left;
+    font: bold 16px 'Roboto';
+    border: 1px solid #121314;
+    border-top: 1px solid #2b2e30;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 0px;
+   
+    overflow: hidden;
+    width:100%;
+    min-width: 650px;
+}
+
+
+#nav NavLink{
+	color: var(--text-white);
+}
+#nav a{
+	color: var(--text-white);
+}
+#nav a:hover {
+	color: var(--link-hover-color);
+  }
+
 .form-control {
 	height: 40px;
 	box-shadow: none;
