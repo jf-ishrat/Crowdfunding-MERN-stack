@@ -5,6 +5,7 @@
 
 html {
     height: 100%;
+    width: 100%;
 }
 
 p {
@@ -15,13 +16,15 @@ p {
 #heading {
     text-transform: uppercase;
     color: #ff00ff;
-    font-weight: normal
+    font-weight: normal;
+    
 }
 
 #msform {
     text-align: center;
     position: relative;
-    margin-top: 20px
+    width: 100%;
+    
 }
 
 #msform fieldset {
@@ -31,8 +34,10 @@ p {
     box-sizing: border-box;
     width: 100%;
     margin: 0;
-    padding-bottom: 20px;
-    position: relative
+    padding-bottom: 5px;
+    position: relative;
+
+    
 }
 
 .form-card {
@@ -40,7 +45,7 @@ p {
 }
 
 #msform fieldset:not(:first-of-type) {
-    display: none
+    display: flex;
 }
 
 #msform input,
@@ -107,7 +112,9 @@ p {
 .card {
     z-index: 0;
     border: none;
-    position: relative
+    position: relative;
+
+  
 }
 
 .fs-title {
@@ -137,7 +144,7 @@ p {
 }
 
 #progressbar {
-    margin-bottom: 30px;
+    margin-top: 30px;
     overflow: hidden;
     color: lightgrey
 }
@@ -215,4 +222,46 @@ p {
 .fit-image {
     width: 100%;
     object-fit: cover
+}
+
+#card-text{
+    margin-bottom: 25px;
+  
+    width: 100%;
+    font-family: montserrat;
+    color: #25282b;
+    background-color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 1px
+
+}
+#card-text .category{
+    margin-top: 2px;
+    color: grey;
+    font-weight: bold;
+    
+
+}
+
+#card-text a{
+    margin-top: 5px;
+    font-family: montserrat;
+
+}
+
+#card-text .card-button{
+    width: 120px;
+    background: white;
+    font-weight: bold;
+    color: black;
+    margin-top: 15px;
+    border-radius: 7px;
+    border-color: #ff00ff;
+    cursor: pointer;
+    float: left;
+}
+
+#card-text .card-button:hover,
+#card-text .card-button:focus {
+    background-color: purple;
 }

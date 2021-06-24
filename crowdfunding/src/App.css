@@ -19,7 +19,7 @@ body {
 }
 
 *:not(i){
-    font-family: 'Roboto', sans-serif;
+    font-family: montserrat;
     font-weight: 400;
 
 }
@@ -35,7 +35,7 @@ body {
 
 #nav {
     float: left;
-    font: bold 16px 'Roboto';
+    font: bold 16px 'montserrat';
     border: 1px solid #121314;
     border-top: 1px solid #2b2e30;
     -webkit-border-radius: 5px;
@@ -208,7 +208,7 @@ h2 {
 	color: #333;
 	text-align: center;
 	text-transform: uppercase;
-	font-family: "Roboto", sans-serif;
+	font-family: montserrat;
 	font-weight: bold;
 	position: relative;
 	margin-top: 1em!important;

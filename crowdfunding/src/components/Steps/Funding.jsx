@@ -2,7 +2,7 @@ import React from "react";
 import '../StartACampaign.css';
 
 
-const Contents = ({ handleChange }) => {
+const Funding = (props) => {
     return (
         <div>
             <fieldset>
@@ -14,18 +14,18 @@ const Contents = ({ handleChange }) => {
                         <div className="col-5">
                             <h2 className="steps">Step 3/3</h2>
                         </div>
-                    </div> 
+                    </div>
                     <label className="fieldlabels">Campaign Goal Amount: *</label>
-                    <input type="number" name="amount" placeholder="Goal Amount" onChange={handleChange("amount")} />
+                    <input type="number" name="amount" placeholder="Goal Amount" value={props.values.amount} onChange={props.handleChange("amount")} />
 
                     <div>
                         <label className="fieldlabels" style={{ "fontSize": "20px" }}>Bank Information *</label>
-                        <br/>
+                        <br />
                         <label className="fieldlabels">Routing Number: *</label>
-                        <input type="number" name="rnumber" placeholder="Bank Routing Number" onChange={handleChange("rnumber")} />
+                        <input type="number" name="rnumber" placeholder="Bank Routing Number" value={props.values.rnumber} onChange={props.handleChange("rnumber")} />
                         <label className="fieldlabels">Account Number: *</label>
-                        <input type="number" name="anumber" placeholder="Bank Account Number" onChange={handleChange("anumber")} />
-                        <input type="number" name="re_anumber" placeholder="Re-type Account Number" onChange={handleChange("re_anumber")} />
+                        <input type="number" name="anumber" placeholder="Bank Account Number" value={props.values.anumber} onChange={props.handleChange("anumber")} />
+                        <input type="number" name="re_anumber" placeholder="Re-type Account Number" value={props.values.re_anumber} onChange={props.handleChange("re_anumber")} />
                     </div>
 
                 </div>
@@ -37,4 +37,4 @@ const Contents = ({ handleChange }) => {
     )
 };
 
-export default Contents;
+export default Funding;
