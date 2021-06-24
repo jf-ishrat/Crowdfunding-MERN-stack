@@ -10,6 +10,7 @@ import NewPassword from './NewPassword'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import ResetPass from './ResetPass'
+import CampaignDetails from './CampaignDetails'
 //import Navigation from './Navigation'
 import WhatWeDo from './WhatWeDo'
 import '../App.css'
@@ -36,6 +37,7 @@ const Routing = () => {
             <Route exact path="/new-password/:token" component={NewPassword} />
 
             <Route exact path="/start-a-campaign" component={StartACampaign} />
+            <Route exact path="/camp-details" component={CampaignDetails} />
             <Redirect to="/" />
         </Switch>
 

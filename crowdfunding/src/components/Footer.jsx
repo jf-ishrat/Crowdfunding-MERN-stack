@@ -7,26 +7,7 @@ const Footer = () => {
 
     return (
         <div className="footer-container bg-dark">
-            <section className="footer-subscription">
-                <p className="footer-subscription-heading">
-                    Join others to bring your project to life!
-                </p>
-                <p className="footer-subscription-text">
-                    You can unsubscribe at any time.
-                </p>
-                <div className="input-areas">
-                    <form>
-                        <input
-                        type="email"
-                        name="email"
-                        placeholder="Your Email"
-                        className="footer-input" 
-                        />
-                        <button>Subscribe</button>
-                    </form>
-                </div>
 
-            </section>
             <div className="footer-links">
                 <div className="footer-link-wrapper">
                     <div className="footer-link-items">
@@ -34,66 +15,47 @@ const Footer = () => {
                         <Link to='/sign-up'>How it works</Link>
                         <Link to='/sign-up'>How it works</Link>
                         <Link to='/sign-up'>How it works</Link>
-                       
+
                     </div>
                     <div className="footer-link-items">
                         <h4>Contact Us</h4>
                         <Link to='/sign-up'>How it works</Link>
                         <Link to='/sign-up'>How it works</Link>
                         <Link to='/sign-up'>How it works</Link>
-                      
+
                     </div>
 
 
                 </div>
 
-                <div className="footer-link-wrapper">
-                    <div className="footer-link-items">
-                        <h4>About Us</h4>
-                        <Link to='/sign-up'>How it works</Link>
-                        <Link to='/sign-up'>How it works</Link>
-                        <Link to='/sign-up'>How it works</Link>
-                   
-                    </div>
-                    <div className="footer-link-items">
-                        <h4>Contact Us</h4>
-                        <Link to='/sign-up'>How it works</Link>
-                        <Link to='/sign-up'>How it works</Link>
-                        <Link to='/sign-up'>How it works</Link>
-                        
-                        
-                    </div>
-
-
-                </div>
             </div>
             <section className="social-media">
                 <div className="social-media-wrap">
                     <div className="footer-logo">
                         <Link to='/' className="social-logo">
-                            CF<i className="fab fa-typo3"/>
+                            CF<i className="fab fa-typo3" />
                         </Link>
                     </div>
                     <small className="website-rights">CF o 2021</small>
                     <div className="social-icons">
-                        <Link 
+                        <Link
                             className="social-icon-link facebook"
                             to='/'
                             target='_blank'
                             aria-label="Facebook"
 
                         >
-                            <i className="bi bi-facebook"/>
+                            <i className="bi bi-facebook" />
 
                         </Link>
-                        <Link 
+                        <Link
                             className="social-icon-link twitter"
                             to='/'
                             target='_blank'
                             aria-label="Twitter"
 
                         >
-                            <i className="fab fa-twitter"/>
+                            <i className="fab fa-twitter" />
 
                         </Link>
 
@@ -104,7 +66,7 @@ const Footer = () => {
 
             </section>
 
-           
+
         </div>
     );
 
