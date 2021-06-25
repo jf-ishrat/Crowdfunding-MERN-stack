@@ -16,7 +16,6 @@ const StartACampaign = () => {
         location: "",
         tags: "",
         duration: "",
-        cimage: "",
         story: "",
         amount: "",
         rnumber: "",
@@ -24,8 +23,9 @@ const StartACampaign = () => {
         re_anumber: "",
 
     });
-    const [file, setFile] = useState("");
-    const [filename, setFilename] = useState("Choose File");
+
+    const [image, setImage] = useState("");
+    const [url, setUrl] = useState("");
 
     const [faqList, setfaqList] = useState([
         { question: "", answer: "" }
@@ -58,20 +58,56 @@ const StartACampaign = () => {
 
     }
 
+    // const postDetails=() =>{
+    //    try{
+    //     const imageData = new FormData()
+    //     imageData.append("file", image)
+    //     imageData.append("upload_preset", "crowdfunding")
+    //     imageData.append("cloud_name", "tumpa")
+    //     const res=await fetch("https://api.cloudinary.com/v1_1/tumpa/image/upload", {
+    //         method:"POST",
+    //         body:imageData
+    //     });
+    //    imageData = await res.json();
+    //    console.log(imageData);
 
+    //    }
+    //    catch(err){
+    //        console.log(err);
 
+    //    }
+
+    // }
+    const postDetails = () => {
+        const imageData = new FormData()
+        imageData.append("file", image)
+        imageData.append("upload_preset", "crowdfunding")
+        imageData.append("cloud_name", "tumpa")
+        fetch("https://api.cloudinary.com/v1_1/tumpa/image/upload", {
+            method: "post",
+            body: imageData
+        })
+            .then(res => res.json())
+            .then(imageData => {
+                setUrl(imageData.url);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+    }
     const PostData = async () => {
         //e.preventDefault();
         try {
 
-            const { ctitle, category, ctagline, location, tags, duration, cimage, story, amount, rnumber, anumber, re_anumber } = values;
+            const { ctitle, category, ctagline, location, tags, duration,story, amount, rnumber, anumber, re_anumber } = values;
             const res = await fetch("/createproject", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    ctitle, category, ctagline, location, tags, duration, cimage, story, amount, rnumber, anumber, re_anumber, faqList
+                    ctitle, category, ctagline, location, tags, duration,story, amount, rnumber, anumber, re_anumber, faqList,url
 
 
                 })
@@ -109,6 +145,7 @@ const StartACampaign = () => {
     const nextStep = () => {
         if (step === 1) {
             if (values.ctitle && values.category && values.ctagline && values.location && values.tags && values.duration) {
+                postDetails();
                 setStep(step + 1);
             }
             else {
@@ -154,12 +191,9 @@ const StartACampaign = () => {
     };
 
 
-    const onChange = e => {
-        setFile(e.target.files[0]);
-        setFilename(e.target.files[0].name);
-    };
 
-    const props = { faqList, setfaqList, values, setValues, handleChange }
+
+    const props = { faqList, setfaqList, values, setValues, image, setImage, handleChange }
 
 
     useEffect(() => {
@@ -183,7 +217,7 @@ const StartACampaign = () => {
                                 <div className="card p-3 w-300 mt-5">
                                     {
                                         {
-                                            1: <BasicStep handleChange={handleChange} values={values} />,
+                                            1: <BasicStep {...props} />,
                                             2: <Contents {...props} />,
                                             3: <Funding handleChange={handleChange} values={values} />,
 

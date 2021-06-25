@@ -252,16 +252,16 @@ router.post('/new-password', async (req, res) => {
 
 router.post('/createproject', authenticate, async (req, res) => {
 
-    const { ctitle, category, ctagline, location, tags, duration, cimage, story, amount, rnumber, anumber, re_anumber, faqList } = req.body;
+    const { ctitle, category, ctagline, location, tags, duration, story, amount, rnumber, anumber, re_anumber, faqList,url } = req.body;
     try {
 
-        if (!ctitle || !category || !ctagline || !location || !tags || !duration || !cimage || !story || !amount || !rnumber || !anumber || !re_anumber || !faqList) {
+        if (!ctitle || !category || !ctagline || !location || !tags || !duration || !story || !amount || !rnumber || !anumber || !re_anumber || !faqList||!url) {
             return res.status(422).send({ error: "plz fill the form correctly" });
         }
 
         const project = new Project({
-            ctitle, category, ctagline, location, tags, duration, cimage, story, amount, rnumber, anumber, re_anumber, faqList,
-            postedBy: req.rootUser
+            ctitle, category, ctagline, location, tags, duration,story, amount, rnumber, anumber, re_anumber, faqList,
+            postedBy: req.rootUser,url
         });
         //const userRegister =
         savedProject = await project.save();
