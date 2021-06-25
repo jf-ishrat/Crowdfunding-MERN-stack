@@ -156,6 +156,13 @@ router.get('/what-we-do', authenticate, (req, res) => {
     //     res.send('Hello World') router.use(cookieparser);
 });
 
+
+router.get('/checklogin', authenticate, (req, res) => {
+    //console.log("hello my about ");
+    // res.send(req.rootUser);
+    //     res.send('Hello World') router.use(cookieparser);
+});
+
 router.get('/logout', (req, res) => {
 
     res.clearCookie('webcookie', { path: '/' });

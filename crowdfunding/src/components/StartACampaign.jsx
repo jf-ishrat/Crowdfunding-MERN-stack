@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './StartACampaign.css'
 import BasicStep from './Steps/BasicStep';
 import Contents from './Steps/Contents';
@@ -7,6 +7,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 //import { Route } from 'react-router';
 
 const StartACampaign = () => {
+
     const history = useHistory();
     const [values, setValues] = useState({
         ctitle: "",
@@ -31,6 +32,33 @@ const StartACampaign = () => {
 
     ]);
     const [step, setStep] = useState(1);
+
+    const callLoginPage = async () => {
+
+        try {
+            const res = await fetch('/checklogin', {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+
+            });
+
+            if (res.status === 401) {
+                const error = new Error(res.error);
+                throw error;
+            }
+
+        } catch (err) {
+            console.log(err);
+            history.push('/login');
+        }
+
+    }
+
+
 
     const PostData = async () => {
         //e.preventDefault();
@@ -57,13 +85,18 @@ const StartACampaign = () => {
                 console.log("Project created");
                 history.push("/");
 
-            } else {
+            } else if (res.status === 401) {
+                const error = new Error(res.error);
+                throw error;
+            }
+            else {
                 window.alert(data.error);
                 console.log("project is not created");
             }
 
         } catch (err) {
             console.log(err);
+            history.push('/login');
         }
 
 
@@ -127,6 +160,12 @@ const StartACampaign = () => {
     };
 
     const props = { faqList, setfaqList, values, setValues, handleChange }
+
+
+    useEffect(() => {
+        callLoginPage();
+
+    }, []);
 
 
 

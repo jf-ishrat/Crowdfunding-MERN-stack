@@ -13,7 +13,7 @@ const Logout = () => {
             },
             credentials: "include"
         }).then((res) => {
-            dispatch({ type: "USER", payload: false });
+            dispatch({ type: "USER1", payload: false });
             history.push('/login', { replace: true });
 
             if (res.status !== 200) {
