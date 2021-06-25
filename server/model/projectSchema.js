@@ -31,10 +31,7 @@ const projectSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    cimage: {
-        type: String,
-        required: true
-    },
+   
 
     story: {
         type: String,
@@ -74,6 +71,10 @@ const projectSchema = new mongoose.Schema({
     postedBy: {
         type: ObjectId,
         ref: "USER"
+    },
+    url: {
+        type: String,
+        required: true
     }
 
 

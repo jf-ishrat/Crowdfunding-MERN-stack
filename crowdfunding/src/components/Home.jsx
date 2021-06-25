@@ -54,31 +54,33 @@ const Home = () => {
 
     return (
         <>
-            <HeroSection />
-            <div>
-                <h2 style={{ "color": "#ff00ff" }}>Available Campaigns</h2>
-            </div>
-            <br />
-            <div className="container">
-                <div className="row">
-                    {
-                        userData.map(item => {
-                            return (
-                                <>
-                                    <div className="col-sm">
-                                        <CardView ctitle={item.ctitle} />
-                                    </div>
-
-
-                                </>
-
-                            )
-                        })
-                    }
-
+            <div className="mt-5">
+                <HeroSection />
+                <div>
+                    <h2 style={{ "color": "#ff00ff" }}>Available Campaigns</h2>
                 </div>
-            </div>
+                <br />
+                <div className="container">
+                    <div className="row">
+                        {
+                            userData.map(item => {
+                                return (
+                                    <>
+                                        <div className="col-sm">
+                                            <CardView item={item} />
+                                        </div>
 
+
+                                    </>
+
+                                )
+                            })
+                        }
+
+                    </div>
+                </div>
+
+            </div>
 
         </>
     );
