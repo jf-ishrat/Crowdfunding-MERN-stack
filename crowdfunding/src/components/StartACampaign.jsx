@@ -3,15 +3,17 @@ import './StartACampaign.css'
 import BasicStep from './Steps/BasicStep';
 import Contents from './Steps/Contents';
 import Funding from './Steps/Funding';
+import { NavLink, useHistory } from 'react-router-dom';
 //import { Route } from 'react-router';
 
 const StartACampaign = () => {
+    const history = useHistory();
     const [values, setValues] = useState({
         ctitle: "",
         category: "",
         ctagline: "",
         location: "",
-        tags: [],
+        tags: "",
         duration: "",
         cimage: "",
         story: "",
@@ -25,10 +27,51 @@ const StartACampaign = () => {
     const [filename, setFilename] = useState("Choose File");
 
     const [faqList, setfaqList] = useState([
-        {question: "", answer: ""}
+        { question: "", answer: "" }
 
     ]);
     const [step, setStep] = useState(1);
+
+    const PostData = async () => {
+        //e.preventDefault();
+        try {
+
+            const { ctitle, category, ctagline, location, tags, duration, cimage, story, amount, rnumber, anumber, re_anumber } = values;
+            const res = await fetch("/createproject", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    ctitle, category, ctagline, location, tags, duration, cimage, story, amount, rnumber, anumber, re_anumber, faqList
+
+
+                })
+
+
+            });
+            const data = await res.json();
+
+            if (res.status === 201) {
+                window.alert("Project created");
+                console.log("Project created");
+                history.push("/");
+
+            } else {
+                window.alert(data.error);
+                console.log("project is not created");
+            }
+
+        } catch (err) {
+            console.log(err);
+        }
+
+
+    }
+
+
+
+
 
     const nextStep = () => {
         if (step === 1) {
@@ -50,14 +93,15 @@ const StartACampaign = () => {
         }
         else if (step === 3) {
             if (values.amount && values.rnumber && values.anumber && values.re_anumber) {
-                if(values.anumber === values.re_anumber){
-                    console.log(values);
-                console.log(faqList);
+                if (values.anumber === values.re_anumber) {
+                    // console.log(values);
+                    // console.log(faqList);
+                    PostData();
                 }
-                else{
+                else {
                     window.alert("Account number did not match!");
                 }
-                
+
 
             }
             else {

@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 require('../db/connection')
 const User = require("../model/userSchema")
+const Project = require("../model/projectSchema");
 const authenticate = require("../middleware/authenticate");
 const cookieparser = require('cookie-parser');
 const validator = require('validator');
@@ -127,7 +128,8 @@ router.post('/signin', async (req, res) => {
                 httpOnly: true
             });
             if (isMatch) {
-                return res.send({ message: "user signin succesfully" });
+                return res.send({ token: token });
+                //return res.send({ message:Login successful});
 
             }
             else {
@@ -237,6 +239,66 @@ router.post('/new-password', async (req, res) => {
     }
 
 
+});
+
+// PROJECTS RELATED REQUEST
+
+router.post('/createproject', authenticate, async (req, res) => {
+
+    const { ctitle, category, ctagline, location, tags, duration, cimage, story, amount, rnumber, anumber, re_anumber, faqList } = req.body;
+    try {
+
+        if (!ctitle || !category || !ctagline || !location || !tags || !duration || !cimage || !story || !amount || !rnumber || !anumber || !re_anumber || !faqList) {
+            return res.status(422).send({ error: "plz fill the form correctly" });
+        }
+
+        const project = new Project({
+            ctitle, category, ctagline, location, tags, duration, cimage, story, amount, rnumber, anumber, re_anumber, faqList,
+            postedBy: req.rootUser
+        });
+        //const userRegister =
+        savedProject = await project.save();
+
+        //return res.status(201).send({ message: Project created });
+        return res.status(201).send({ message: savedProject });
+
+
+
+    } catch (err) {
+        console.log(err);
+
+    }
+
+    //res.send('Hello World from router')
+});
+
+router.get('/allproject', authenticate, async (req, res) => {
+    //console.log("hello my about ");
+    //res.send(req.rootUser);
+    //     res.send('Hello World') router.use(cookieparser);
+    try {
+        const allProject = await Project.find().populate("postedBy", "_id name");
+        console.log(allProject);
+        return res.status(201).send({ project: allProject });
+
+    } catch (err) {
+        console.log(err);
+        res.status(401).send('can not fetch');
+    }
+});
+
+router.get('/myproject', authenticate, async (req, res) => {
+    //console.log("hello my about ");
+    //res.send(req.rootUser);
+    //     res.send('Hello World') router.use(cookieparser);
+    try {
+        const myProject = await Project.find({ postedBy: req.userID }).populate("postedBy", "_id name");
+        console.log(myProject);
+        return res.status(201).send({ message: myProject });
+
+    } catch (err) {
+        console.log(err)
+    }
 });
 
 module.exports = router;
