@@ -37,7 +37,7 @@ const Routing = () => {
             <Route exact path="/new-password/:token" component={NewPassword} />
 
             <Route exact path="/start-a-campaign" component={StartACampaign} />
-            <Route exact path="/camp-details" component={CampaignDetails} />
+            <Route exact path="/camp-details/:id" component={CampaignDetails} />
             <Redirect to="/" />
         </Switch>
 

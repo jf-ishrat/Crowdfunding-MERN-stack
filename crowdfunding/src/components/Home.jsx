@@ -27,6 +27,7 @@ const Home = () => {
             data = await res.json();
             console.log(data.project);
             setuserData(data.project);
+            console.log(userData)
             if (res.status === 401) {
                 const error = new Error(res.error);
                 throw error;
@@ -54,33 +55,36 @@ const Home = () => {
 
     return (
         <>
-            <div className="mt-5">
-                <HeroSection />
-                <div>
-                    <h2 style={{ "color": "#ff00ff" }}>Available Campaigns</h2>
-                </div>
-                <br />
-                <div className="container">
-                    <div className="row">
-                        {
-                            userData.map(item => {
-                                return (
-                                    <>
-                                        <div className="col-sm">
-                                            <CardView item={item} />
-                                        </div>
-
-
-                                    </>
-
-                                )
-                            })
-                        }
-
+            {userData ?
+                <div className="mt-5">
+                    <HeroSection />
+                    <div>
+                        <h2 style={{ "color": "#ff00ff" }}>Available Campaigns</h2>
                     </div>
-                </div>
+                    <br />
+                    <div className="container">
+                        <div className="row">
+                            {
+                                userData.map(item => {
+                                    return (
+                                        <>
+                                            <div className="col-sm">
+                                                <CardView item={item} />
+                                            </div>
 
-            </div>
+
+                                        </>
+
+                                    )
+                                })
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+                : <h6>Lodding</h6>}
+
 
         </>
     );

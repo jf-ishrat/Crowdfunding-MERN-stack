@@ -26,7 +26,7 @@ const WhatWeDo = () => {
             data = await res.json();
             console.log(data);
             setuserData(data);
-            console.log(userData.name);
+            console.log(userData);
             console.log(userData.email);
             //console.log("what we do ");
             //console.log(data);
