@@ -279,7 +279,7 @@ router.post('/createproject', authenticate, async (req, res) => {
     //res.send('Hello World from router')
 });
 
-router.get('/allproject', authenticate, async (req, res) => {
+router.get('/allproject', async (req, res) => {
     //console.log("hello my about ");
     //res.send(req.rootUser);
     //     res.send('Hello World') router.use(cookieparser);
