@@ -1,13 +1,18 @@
-import React,{useContext} from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { UserContext } from './App';
+import CardView from './CardView';
+import M from 'materialize-css'
 
 const Navbar = () => {
     const { state, dispatch } = useContext(UserContext);
+    const [search, setSearch] = useState('')
+    const [projectDetails, setProjectDetails] = useState([])
+    const searchModal = useRef(null)
 
-    const RenderMenu=()=>{
-        if (state){
-            return(
+    const RenderMenu = () => {
+        if (state) {
+            return (
                 <>
                     <li className="nav-item "><NavLink aria-current="page" to="/" className="nav-link active"></NavLink></li>
                     <li className="nav-item"><NavLink to="/what-we-do" className="nav-link">What We Do</NavLink></li>
@@ -17,8 +22,8 @@ const Navbar = () => {
                 </>
             )
         }
-        else{
-            return(
+        else {
+            return (
                 <>
                     <li className="nav-item "><NavLink aria-current="page" to="/" className="nav-link active"></NavLink></li>
                     <li className="nav-item"><NavLink to="/what-we-do" className="nav-link">What We Do</NavLink></li>
@@ -27,11 +32,47 @@ const Navbar = () => {
 
                     <li className="nav-item"><NavLink to="/login" className="nav-link">Login</NavLink></li>
                     <li className="nav-item"><NavLink to="/signup" className="nav-link">Sign Up</NavLink></li>
-                
+
                 </>
             )
         }
     }
+
+
+
+    const fetchProject = (query) => {
+        setSearch(query)
+        fetch('/search-project', {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                query
+            })
+        }).then(res => res.json())
+            .then(results => {
+                setProjectDetails(results.project)
+                console.log(results.project)
+                console.log(projectDetails)
+            })
+    }
+
+
+    useEffect(() => {
+        M.Modal.init(searchModal.current)
+    }, []);
+
+
+    const clearmethod = () => {
+        setSearch('');
+        setProjectDetails([]);
+    }
+
+
+
+
+
     return (
         <>
             <div clasName="container-fluid nav_bg" id="nav">
@@ -41,24 +82,25 @@ const Navbar = () => {
                         <nav className="navbar navbar-expand-lg bg-dark fixed-top" id="ftco-navbar">
                             <div className="container-fluid">
                                 <NavLink className="navbar-brand" to="/">
-                                Crowdfunding
-                    
+                                    Crowdfunding
+
                                 </NavLink>
                                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                                     <span className="oi oi-menu"></span> Menu
-                               </button>
+                                </button>
 
                                 <div className="collapse navbar-collapse" id="ftco-nav">
-                                    <form className="d-flex">
-                                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
 
-                                    </form>
+
+                                    <i data-target="modal1" className="large material-icons modal-trigger" >search</i>
+
+
                                     <ul className="navbar-nav ml-auto">
 
                                         <li className="nav-item dropdown">
                                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                                                 Explore
-</a>
+                                            </a>
 
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li><a className="dropdown-item" href="/explore">Tech & Innovation</a></li>
@@ -68,18 +110,57 @@ const Navbar = () => {
                                             </ul>
                                         </li>
 
-                                        <RenderMenu/>
+                                        <RenderMenu />
 
 
 
 
-                                        
+
 
 
                                     </ul>
                                 </div>
                             </div>
+                            <div id="modal1" class="modal" ref={searchModal} style={{ color: "black", width: "500px", maxHeight: " 500px", overflowY: "auto" }}>
+                                <div className="modal-content">
+                                    <input
+                                        type="text"
+                                        placeholder="search projects"
+                                        value={search}
+                                        onChange={(e) => fetchProject(e.target.value)}
+                                    />
+
+                                    <ul className="collection">
+
+                                        {
+                                            projectDetails.map(item => {
+                                                return (
+                                                    <>
+
+                                                        <li class="collection-item avatar">
+
+                                                            <CardView item={item} />
+                                                        </li>
+
+                                                    </>
+
+                                                )
+                                            })
+                                        }
+
+                                    </ul>
+
+                                </div>
+                                <div className="modal-footer">
+                                    <button className="modal-close waves-effect waves-green btn-flat" onClick={clearmethod}>close</button>
+                                </div>
+                            </div>
+
+
                         </nav>
+
+
+
                     </div>
                 </div>
             </div>

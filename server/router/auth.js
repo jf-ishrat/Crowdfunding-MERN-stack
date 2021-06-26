@@ -326,7 +326,7 @@ router.get('/myproject', authenticate, async (req, res) => {
 // });
 
 
-router.get('/projectdetails/:id', authenticate, (req, res) => {
+router.get('/projectdetails/:id', (req, res) => {
     Project.findOne({ _id: req.params.id })
         .then(project => {
             User.findOne({ _id: project.postedBy })
@@ -340,5 +340,24 @@ router.get('/projectdetails/:id', authenticate, (req, res) => {
             return res.status(404).json({ error: "User not found" })
         })
 })
+
+
+
+//search project
+
+router.post('/search-project', (req, res) => {
+    let projectPattern = new RegExp("^" + req.body.query)
+    Project.find({ tags: { $regex: projectPattern } })
+        .then(project => {
+            res.json({ project })
+        }).catch(err => {
+            console.log(err)
+        })
+
+})
+
+
+
+
 
 module.exports = router;
