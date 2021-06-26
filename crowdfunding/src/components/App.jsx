@@ -28,7 +28,7 @@ const Routing = () => {
     return (
         <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/explore" component={Explore} />
+            <Route exact path="/explore/:type" component={Explore} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/logout" component={Logout} />
             <Route exact path="/signup" component={SignUp} />
