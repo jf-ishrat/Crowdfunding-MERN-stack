@@ -11,6 +11,7 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import ResetPass from './ResetPass'
 import CampaignDetails from './CampaignDetails'
+import Payment from './Payment'
 //import Navigation from './Navigation'
 import WhatWeDo from './WhatWeDo'
 import '../App.css'
@@ -38,6 +39,8 @@ const Routing = () => {
 
             <Route exact path="/start-a-campaign" component={StartACampaign} />
             <Route exact path="/camp-details/:id" component={CampaignDetails} />
+            <Route exact path="/payment" component={Payment} />
+
             <Redirect to="/" />
         </Switch>
 
