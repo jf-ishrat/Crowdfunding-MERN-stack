@@ -1,0 +1,17 @@
+.label-text{
+    padding: 5px 5px 5px 5px;
+  
+    
+}
+
+.label-text label{
+    margin-bottom: 25px;
+  
+    
+    font-family: montserrat;
+    color: #25282b;
+   
+    font-size: 20px;
+    letter-spacing: 1px;
+
+}
