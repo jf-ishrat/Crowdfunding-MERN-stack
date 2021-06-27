@@ -56,9 +56,12 @@ const Home = () => {
     return (
         <>
             {userData ?
-                <div className="mt-5">
-                    <HeroSection />
+                <div className="container mt-5">
                     <div>
+                    <HeroSection />
+                    </div>
+                    <br/>
+                    <div style={{marginTop: "20px"}}>
                         <h2 style={{ "color": "#ff00ff" }}>Available Campaigns</h2>
                     </div>
                     <br />

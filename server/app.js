@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const express = require('express');
 const cors = require('cors');
-const stripe = require("stripe")("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")
+const stripe = require("stripe")("sk_test_51J6aoDKc0TZv9NwK4iBPEs9bMK2eknweXnjrlMSYGcx74nNBeGWfTZExeXvLVJAEdKzMdOfrkBf4iZimMj2lA98B00XI6BwpT1")
 const { v4: uuidv4 } = require('uuid');
 const app = express();
 //const cookieparser = require("cookie-parser");
@@ -14,11 +14,11 @@ dotenv.config({ path: './config.env' });
 require('./db/connection');
 
 app.use(express.json());
-app.use(cors)
+// app.use(cors)
 
 
 app.use(require('./router/auth'))
-
+app.use(cors())
 
 
 const PORT = process.env.PORT;

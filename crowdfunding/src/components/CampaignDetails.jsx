@@ -92,7 +92,7 @@ const CampaignDetails = () => {
                                 </div>
                             </div>
                             <div className="about-info">
-                                <span style={{ color: "#ff00ff", fontSize:"20px"}}>{projectProfile.project.category}</span>
+                                <span style={{ color: "#ff00ff", fontSize: "20px" }}>{projectProfile.project.category}</span>
                                 <h3 id="title">{projectProfile.project.ctitle}</h3>
                                 <p id="tagline-text">{projectProfile.project.ctagline}</p>
                                 <div style={{ maxWidth: "400px", margin: "0px 0px" }}>
@@ -113,7 +113,7 @@ const CampaignDetails = () => {
 
 
                                         </div>
-                                        
+
                                     </div>
                                 </div>
 
@@ -128,61 +128,65 @@ const CampaignDetails = () => {
                                     <span style={{ marginLeft: "320px" }}>{projectProfile.project.duration} days left</span>
                                 </div>
 
-                                <button className="action-button">Back it</button>
+
+                                <div>
+                                    <button className="action-button" style={{ position: "absolute", bottom: "115px" }}>Back it</button>
+                                </div>
+
 
                             </div>
                         </div>
 
-                        <nav>
+                        <nav style={{ backgroundColor: "#e9ecef" }}>
                             <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Story</button>
-                                <button className="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">FAQ</button>
-                                <button className="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Discussion</button>
+                                <button className="nav-link active tab1" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Story</button>
+                                <button className="nav-link tab1" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">FAQ</button>
+                                <button className="nav-link tab1" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Discussion</button>
                             </div>
                         </nav>
                         <div className="tab-content" id="nav-tabContent">
                             <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <p style={{ "height": "500px", fontSize:"25px" }}> {projectProfile.project.story} </p>
+                                <p className="tab-cont" style={{ "height": "500px" }}> {projectProfile.project.story} </p>
                             </div>
                             <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+
+
+
+
+
                                 <div className="accordion" id="accordionPanelsStayOpenExample">
-                                    <div className="accordion-item">
-                                        <h2 className="accordion-header" id="panelsStayOpen-headingOne">
-                                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                                {projectProfile.project.faqList[0].question}
-                                            </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                            <div className="accordion-body">
-                                                <strong> {projectProfile.project.faqList[0].answer}</strong> It is shown by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="accordion-item">
-                                        <h2 className="accordion-header" id="panelsStayOpen-headingTwo">
-                                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                                Accordion Item #2
-                                            </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                                            <div className="accordion-body">
-                                                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="accordion-item">
-                                        <h2 className="accordion-header" id="panelsStayOpen-headingThree">
-                                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                                Accordion Item #3
-                                            </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseThree" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                                            <div className="accordion-body">
-                                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {projectProfile.project.faqList.map(item => {
+
+
+                                        return (
+                                            <>
+                                                <div className="accordion-item">
+                                                    <h2 className="accordion-header" id="panelsStayOpen-headingOne">
+                                                        <button className="accordion-button tab-cont " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" style={{ backgroundColor: "#e9ecef" }}>
+                                                            {item.question}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                                        <div className="accordion-body">
+                                                            <strong> {item.answer}</strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </>
+                                        )
+
+                                    })}
+
+
+
                                 </div>
+
+
+
+
+
                             </div>
 
                             <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">

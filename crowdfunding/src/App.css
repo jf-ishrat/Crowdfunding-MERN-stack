@@ -48,8 +48,11 @@ body {
 }
 
 
-#nav NavLink{
+#nav .NavLink{
 	color: var(--text-white);
+	
+
+	
 }
 #nav a{
 	color: var(--text-white);

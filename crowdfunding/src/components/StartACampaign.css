@@ -250,15 +250,15 @@ p {
 }
 
 #card-text .card-button{
-    width: 130px;
+    width: 150px;
     background: white;
     font-weight: bold;
     color: black;
-    margin-top: 15px;
+    margin-right: 150px;
     border-radius: 7px;
     border-color: #ff00ff;
     cursor: pointer;
-    float: left;
+    
 }
 
 #card-text .card-button:hover,
