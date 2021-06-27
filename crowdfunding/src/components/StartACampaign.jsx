@@ -100,14 +100,20 @@ const StartACampaign = () => {
         //e.preventDefault();
         try {
 
-            const { ctitle, category, ctagline, location, tags, duration,story, amount, rnumber, anumber, re_anumber } = values;
+            const { ctitle, category, ctagline, location, tags, duration, story, amount, rnumber, anumber, re_anumber } = values;
+            const startdate = new Date();
+            const expiredate = new Date();
+
+
+            expiredate.setDate(startdate.getDate() + parseInt(duration));
+
             const res = await fetch("/createproject", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    ctitle, category, ctagline, location, tags, duration,story, amount, rnumber, anumber, re_anumber, faqList,url
+                    ctitle, category, ctagline, location, tags, duration, story, amount, rnumber, anumber, re_anumber, faqList, startdate, expiredate, url
 
 
                 })

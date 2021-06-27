@@ -31,7 +31,7 @@ const projectSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-   
+
 
     story: {
         type: String,
@@ -72,10 +72,28 @@ const projectSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "USER"
     },
+    startdate: {
+        type: Date,
+        required: true
+
+    },
+    expiredate: {
+        type: Date,
+        required: true
+
+    },
     url: {
         type: String,
         required: true
     }
+    ,
+    backed: [
+        {
+            type: ObjectId,
+            ref: "USER"
+        }
+
+    ]
 
 
 });
