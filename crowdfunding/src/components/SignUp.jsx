@@ -4,18 +4,6 @@ import { NavLink, useHistory } from 'react-router-dom';
 
 
 const SignUp = () => {
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [allEntry, setAllEntry] = useState([]);
-
-    // const SubmitForm = (e) => {
-    //     e.preventDefault();
-
-    //     const newEntry = { email, password };
-    //     setAllEntry([...allEntry, newEntry]);
-    //     console.log(allEntry);
-    //     setEmail("");
-    //     setPassword("");
 
 
     const history = useHistory();

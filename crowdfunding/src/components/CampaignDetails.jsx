@@ -9,6 +9,7 @@ const CampaignDetails = () => {
     const { id } = useParams();
 
     const history = useHistory();
+    let expire;
 
 
 
@@ -54,29 +55,22 @@ const CampaignDetails = () => {
             })
     }
 
-    //     });
-    //     //console.log(res);
 
-    //     const data = await res.json();
-
-    //     setUser(data);
-    //     console.log(data);
-    //     //console.log(user1);
-    //     if (res.status !== 201) {
-    //         const error = new Error(res.error);
-    //         throw error;
-    //     }
-
-    // } catch (err) {
-    //     console.log(err);
-    // }
-
-    //}
 
     useEffect(() => {
         callcampaigndetails();
 
     }, []);
+
+    const leftTime = (time) => {
+        const lastdate = new Date((time)).getTime();
+        const now = new Date().getTime();
+        const dist = lastdate - now;
+        const days = Math.floor(dist / (1000 * 60 * 60 * 24))
+        return days;
+
+
+    }
 
 
     return (
@@ -125,12 +119,12 @@ const CampaignDetails = () => {
                                 <div>
                                     <span>${projectProfile.project.amount} (Goal)</span>
 
-                                    <span style={{ marginLeft: "320px" }}>{projectProfile.project.duration} days left</span>
+                                    <span style={{ marginLeft: "320px" }}>{leftTime(projectProfile.project.expiredate)} days left</span>
                                 </div>
 
 
                                 <div>
-                                    <button className="action-button" style={{ position: "absolute", bottom: "115px" }}>Back it</button>
+                                    <button className="action-button" onClick={() => history.push("/camp-details/" + projectProfile.project._id + "/payment")} style={{ position: "absolute", bottom: "115px" }}>Back it</button>
                                 </div>
 
 

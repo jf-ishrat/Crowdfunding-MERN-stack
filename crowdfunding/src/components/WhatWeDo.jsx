@@ -21,7 +21,7 @@ const WhatWeDo = () => {
                 credentials: "include"
 
             });
-            //console.log(res);
+
 
             data = await res.json();
             console.log(data);

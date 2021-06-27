@@ -50,6 +50,10 @@ const projectSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    raisedamount: {
+        type: Number,
+
+    },
     re_anumber: {
         type: Number,
         required: true
@@ -89,11 +93,14 @@ const projectSchema = new mongoose.Schema({
     ,
     backed: [
         {
-            type: ObjectId,
-            ref: "USER"
+            backer: {
+                type: ObjectId,
+                ref: "USER"
+            }
         }
 
-    ]
+    ],
+
 
 
 });

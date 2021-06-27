@@ -21,6 +21,7 @@ const StartACampaign = () => {
         rnumber: "",
         anumber: "",
         re_anumber: "",
+        raisedamount: "0"
 
     });
 
@@ -100,7 +101,7 @@ const StartACampaign = () => {
         //e.preventDefault();
         try {
 
-            const { ctitle, category, ctagline, location, tags, duration, story, amount, rnumber, anumber, re_anumber } = values;
+            const { ctitle, category, ctagline, location, tags, duration, story, amount, rnumber, anumber, re_anumber, raisedamount } = values;
             const startdate = new Date();
             const expiredate = new Date();
 
@@ -113,7 +114,7 @@ const StartACampaign = () => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    ctitle, category, ctagline, location, tags, duration, story, amount, rnumber, anumber, re_anumber, faqList, startdate, expiredate, url
+                    ctitle, category, ctagline, location, tags, duration, story, amount, raisedamount: amount, rnumber, anumber, re_anumber, faqList, startdate, expiredate, url
 
 
                 })

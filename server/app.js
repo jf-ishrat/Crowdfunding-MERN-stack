@@ -19,44 +19,45 @@ app.use(express.json());
 
 app.use(require('./router/auth'))
 app.use(cors())
+app.use(require('./router/stripe-route'))
 
 
 const PORT = process.env.PORT;
 
 
 
-app.post("/payment", (req, res) => {
-    const { product, token } = req.body;
-    console.log("PRODUCT ", product);
-    console.log("PRICE ", product.price);
-    const idempontencyKey = uuidv4();
+// app.post("/payment", (req, res) => {
+//     const { product, token } = req.body;
+//     console.log("PRODUCT ", product);
+//     console.log("PRICE ", product.price);
+//     const idempontencyKey = uuidv4();
 
-    return stripe.customers
-        .create({
-            email: token.email,
-            source: token.id
-        })
-        .then(customer => {
-            stripe.charges.create(
-                {
-                    amount: product.price * 100,
-                    currency: "usd",
-                    customer: customer.id,
-                    receipt_email: token.email,
-                    description: `purchase of ${product.name}`,
-                    shipping: {
-                        name: token.card.name,
-                        address: {
-                            country: token.card.address_country
-                        }
-                    }
-                },
-                { idempontencyKey }
-            );
-        })
-        .then(result => res.status(200).json(result))
-        .catch(err => console.log(err));
-});
+//     return stripe.customers
+//         .create({
+//             email: token.email,
+//             source: token.id
+//         })
+//         .then(customer => {
+//             stripe.charges.create(
+//                 {
+//                     amount: product.price * 100,
+//                     currency: "usd",
+//                     customer: customer.id,
+//                     receipt_email: token.email,
+//                     description: `purchase of ${product.name}`,
+//                     shipping: {
+//                         name: token.card.name,
+//                         address: {
+//                             country: token.card.address_country
+//                         }
+//                     }
+//                 },
+//                 { idempontencyKey }
+//             );
+//         })
+//         .then(result => res.status(200).json(result))
+//         .catch(err => console.log(err));
+// });
 
 // const middleware = (req, res, next) => {
 //     console.log(`hello middleware`);

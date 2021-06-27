@@ -24,7 +24,7 @@ const BasicStep = ({ values, setValues, image, setImage, handleChange }) => {
                         <option value="Wellness">Wellness</option>
                     </select>
                     <label className="fieldlabels">Campaign Tagline: *</label>
-                    <input type="text" name="ctagline" placeholder="Short Description" value={values.ctagline} onChange={handleChange("ctagline")} />
+                    <input type="text" name="ctagline" placeholder="Short Description" value={values.ctagline} onChange={handleChange("ctagline")} maxLength="20" />
                     <label className="fieldlabels">Location: *</label>
                     <input type="text" name="location" placeholder="Country Name" value={values.location} onChange={handleChange("location")} />
                     <label className="fieldlabels">Tags: *</label>

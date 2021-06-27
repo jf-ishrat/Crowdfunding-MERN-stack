@@ -343,6 +343,28 @@ router.get('/projectdetails/:id', (req, res) => {
 
 
 
+router.get('/projectdetails/:id/payment', async (req, res) => {
+
+    try {
+        const myProject = await Project.findOne({ _id: req.params.id }).populate("postedBy", "_id name");
+        console.log(myProject);
+        return res.status(201).send({ myProject });
+
+    } catch (err) {
+        console.log(err)
+    }
+
+})
+
+
+
+
+
+
+
+
+
+
 //search project
 
 router.post('/search-project', (req, res) => {

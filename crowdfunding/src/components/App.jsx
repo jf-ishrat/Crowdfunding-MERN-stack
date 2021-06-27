@@ -39,7 +39,7 @@ const Routing = () => {
 
             <Route exact path="/start-a-campaign" component={StartACampaign} />
             <Route exact path="/camp-details/:id" component={CampaignDetails} />
-            <Route exact path="/payment" component={Payment} />
+            <Route exact path="/camp-details/:id/payment" component={Payment} />
 
             <Redirect to="/" />
         </Switch>
