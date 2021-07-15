@@ -145,10 +145,6 @@ const CampaignDetails = () => {
                             <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
 
-
-
-
-
                                 <div className="accordion" id="accordionPanelsStayOpenExample">
                                     {projectProfile.project.faqList.map(item => {
 

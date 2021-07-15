@@ -4,6 +4,7 @@ import '../../node_modules/bootstrap/dist/js/bootstrap.bundle'
 import Home from './Home'
 import Login from './Login'
 import SignUp from './SignUp'
+import Profile from './Profile';
 import Explore from './Explore'
 import StartACampaign from './StartACampaign'
 import NewPassword from './NewPassword'
@@ -32,6 +33,7 @@ const Routing = () => {
             <Route exact path="/explore/:type" component={Explore} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/logout" component={Logout} />
+            <Route exact path="/profile" component={Profile} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/what-we-do" component={WhatWeDo} />
             <Route exact path="/reset-pass" component={ResetPass} />
